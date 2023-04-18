@@ -1,0 +1,16 @@
+{
+  "namespace": "sparrow",
+  "name": "Phalcon Uuid",
+  "description": "Phalcon Uuid",
+  "author": "Sergey Mukhin",
+  "version": "1.0.0",
+  "extension-name": "phalcon_uuid",
+
+  "optimizations": {
+    "static-type-inference": true,
+    "static-type-inference-second-pass": true,
+    "local-context-pass": true,
+    "constant-folding": true,
+    "static-constant-class-folding": true
+  }
+}

@@ -1,0 +1,59 @@
+
+extern zend_class_entry *phalcon2_encryption_security_uuid_abstractuuid_ce;
+
+ZEPHIR_INIT_CLASS(Phalcon2_Encryption_Security_Uuid_AbstractUuid);
+
+PHP_METHOD(Phalcon2_Encryption_Security_Uuid_AbstractUuid, mac);
+PHP_METHOD(Phalcon2_Encryption_Security_Uuid_AbstractUuid, parse);
+PHP_METHOD(Phalcon2_Encryption_Security_Uuid_AbstractUuid, format);
+PHP_METHOD(Phalcon2_Encryption_Security_Uuid_AbstractUuid, hexToDateTime);
+PHP_METHOD(Phalcon2_Encryption_Security_Uuid_AbstractUuid, toString);
+PHP_METHOD(Phalcon2_Encryption_Security_Uuid_AbstractUuid, getNodeProvider);
+PHP_METHOD(Phalcon2_Encryption_Security_Uuid_AbstractUuid, __toString);
+PHP_METHOD(Phalcon2_Encryption_Security_Uuid_AbstractUuid, jsonSerialize);
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon2_encryption_security_uuid_abstractuuid_mac, 0, 1, IS_STRING, 1)
+	ZEND_ARG_TYPE_INFO(0, uuid, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon2_encryption_security_uuid_abstractuuid_parse, 0, 1, IS_ARRAY, 1)
+	ZEND_ARG_INFO(0, uuid)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon2_encryption_security_uuid_abstractuuid_format, 0, 2, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, hash, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, version, IS_LONG, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon2_encryption_security_uuid_abstractuuid_hextodatetime, 0, 1, \\DateTimeImmutable, 0)
+	ZEND_ARG_INFO(0, time)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon2_encryption_security_uuid_abstractuuid_tostring, 0, 0, 1)
+	ZEND_ARG_INFO(0, v)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon2_encryption_security_uuid_abstractuuid_getnodeprovider, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon2_encryption_security_uuid_abstractuuid___tostring, 0, 0, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon2_encryption_security_uuid_abstractuuid_jsonserialize, 0, 0, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(phalcon2_encryption_security_uuid_abstractuuid_method_entry) {
+	PHP_ME(Phalcon2_Encryption_Security_Uuid_AbstractUuid, mac, arginfo_phalcon2_encryption_security_uuid_abstractuuid_mac, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Phalcon2_Encryption_Security_Uuid_AbstractUuid, parse, arginfo_phalcon2_encryption_security_uuid_abstractuuid_parse, ZEND_ACC_PRIVATE|ZEND_ACC_STATIC)
+	PHP_ME(Phalcon2_Encryption_Security_Uuid_AbstractUuid, format, arginfo_phalcon2_encryption_security_uuid_abstractuuid_format, ZEND_ACC_PROTECTED)
+	PHP_ME(Phalcon2_Encryption_Security_Uuid_AbstractUuid, hexToDateTime, arginfo_phalcon2_encryption_security_uuid_abstractuuid_hextodatetime, ZEND_ACC_PROTECTED)
+	PHP_ME(Phalcon2_Encryption_Security_Uuid_AbstractUuid, toString, arginfo_phalcon2_encryption_security_uuid_abstractuuid_tostring, ZEND_ACC_PRIVATE|ZEND_ACC_STATIC)
+#if PHP_VERSION_ID >= 80000
+	PHP_ME(Phalcon2_Encryption_Security_Uuid_AbstractUuid, getNodeProvider, arginfo_phalcon2_encryption_security_uuid_abstractuuid_getnodeprovider, ZEND_ACC_PROTECTED)
+#else
+	PHP_ME(Phalcon2_Encryption_Security_Uuid_AbstractUuid, getNodeProvider, NULL, ZEND_ACC_PROTECTED)
+#endif
+	PHP_ME(Phalcon2_Encryption_Security_Uuid_AbstractUuid, __toString, arginfo_phalcon2_encryption_security_uuid_abstractuuid___tostring, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon2_Encryption_Security_Uuid_AbstractUuid, jsonSerialize, arginfo_phalcon2_encryption_security_uuid_abstractuuid_jsonserialize, ZEND_ACC_PUBLIC)
+	PHP_FE_END
+};

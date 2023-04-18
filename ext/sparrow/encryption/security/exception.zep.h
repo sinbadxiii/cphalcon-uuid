@@ -1,0 +1,5 @@
+
+extern zend_class_entry *sparrow_encryption_security_exception_ce;
+
+ZEPHIR_INIT_CLASS(Sparrow_Encryption_Security_Exception);
+
