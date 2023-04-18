@@ -2,6 +2,29 @@
 
 The library allows you to generate uuid 1-5 versions (for now).
 
+## Install
+
+```
+git clone https://github.com/sinbadxiii/cphalcon-uuid
+cd cphalcon-uuid/ext
+sudo ./install
+```
+
+include php ext `phalcon_uuid` in your PHP
+
+```shell
+php -m
+
+...
+pdo_mysql
+pdo_sqlite
+phalcon
+phalcon_uuid
+Phar
+posix
+...
+```
+
 Example:
 
 ```php 
@@ -27,6 +50,8 @@ $uuid->uuid5($uuid->uuid4(), "name") //e2638379-8788-54d0-aa16-c2456941dddc
 $uuid->uuid5($uuid->uuid4(), "name") //48edad3f-881b-568d-b998-5c8c3ed20728
 $uuid->uuid5($uuid->uuid4(), "name") //cafcfaf8-e83f-5e7e-9a23-7039010f5168
 
+//version 6
+//in developing
 ```
 
 
