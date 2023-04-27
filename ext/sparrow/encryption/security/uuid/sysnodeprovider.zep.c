@@ -92,7 +92,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_SysNodeProvider, getNode)
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "PHP_OS");
-	ZEPHIR_CALL_FUNCTION(&phpOs, "constant", NULL, 56, &_0);
+	ZEPHIR_CALL_FUNCTION(&phpOs, "constant", NULL, 57, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_fast_strtoupper(&_0, &phpOs);
@@ -100,7 +100,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_SysNodeProvider, getNode)
 		ZEPHIR_INIT_VAR(&_1$$3);
 		ZVAL_STRING(&_1$$3, "/sys/class/net/*/address");
 		ZVAL_LONG(&_2$$3, 4);
-		ZEPHIR_CALL_FUNCTION(&addressPaths$$3, "glob", NULL, 57, &_1$$3, &_2$$3);
+		ZEPHIR_CALL_FUNCTION(&addressPaths$$3, "glob", NULL, 58, &_1$$3, &_2$$3);
 		zephir_check_call_status();
 		_3$$3 = ZEPHIR_IS_FALSE_IDENTICAL(&addressPaths$$3);
 		if (!(_3$$3)) {
@@ -118,7 +118,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_SysNodeProvider, getNode)
 				{
 					ZEPHIR_INIT_NVAR(&addressPath$$5);
 					ZVAL_COPY(&addressPath$$5, _4$$5);
-					ZEPHIR_CALL_FUNCTION(&_6$$6, "is_readable", &_7, 58, &addressPath$$5);
+					ZEPHIR_CALL_FUNCTION(&_6$$6, "is_readable", &_7, 59, &addressPath$$5);
 					zephir_check_call_status();
 					if (zephir_is_true(&_6$$6)) {
 						ZEPHIR_INIT_NVAR(&_8$$7);
@@ -137,7 +137,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_SysNodeProvider, getNode)
 					}
 					ZEPHIR_CALL_METHOD(&addressPath$$5, &addressPaths$$3, "current", NULL, 0);
 					zephir_check_call_status();
-						ZEPHIR_CALL_FUNCTION(&_9$$8, "is_readable", &_7, 58, &addressPath$$5);
+						ZEPHIR_CALL_FUNCTION(&_9$$8, "is_readable", &_7, 59, &addressPath$$5);
 						zephir_check_call_status();
 						if (zephir_is_true(&_9$$8)) {
 							ZEPHIR_INIT_NVAR(&_10$$9);
@@ -151,17 +151,17 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_SysNodeProvider, getNode)
 			ZEPHIR_INIT_NVAR(&addressPath$$5);
 			ZEPHIR_INIT_VAR(&_11$$5);
 			ZVAL_STRING(&_11$$5, "trim");
-			ZEPHIR_CALL_FUNCTION(&_12$$5, "array_map", NULL, 59, &_11$$5, &macs$$5);
+			ZEPHIR_CALL_FUNCTION(&_12$$5, "array_map", NULL, 60, &_11$$5, &macs$$5);
 			zephir_check_call_status();
 			ZEPHIR_CPY_WRT(&macs$$5, &_12$$5);
 			ZEPHIR_INIT_NVAR(&_11$$5);
 			ZEPHIR_INIT_NVAR(&_11$$5);
 			zephir_create_closure_ex(&_11$$5, NULL, sparrow_0__closure_ce, SL("__invoke"));
-			ZEPHIR_CALL_FUNCTION(&_12$$5, "array_filter", NULL, 60, &macs$$5, &_11$$5);
+			ZEPHIR_CALL_FUNCTION(&_12$$5, "array_filter", NULL, 61, &macs$$5, &_11$$5);
 			zephir_check_call_status();
 			ZEPHIR_CPY_WRT(&macs$$5, &_12$$5);
 			ZEPHIR_MAKE_REF(&macs$$5);
-			ZEPHIR_CALL_FUNCTION(&mac, "reset", NULL, 61, &macs$$5);
+			ZEPHIR_CALL_FUNCTION(&mac, "reset", NULL, 62, &macs$$5);
 			ZEPHIR_UNREF(&macs$$5);
 			zephir_check_call_status();
 			zephir_cast_to_string(&_13$$5, &mac);
@@ -171,19 +171,19 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_SysNodeProvider, getNode)
 	if (ZEPHIR_IS_STRING_IDENTICAL(&node, "")) {
 		ZEPHIR_INIT_VAR(&_14$$10);
 		ZVAL_STRING(&_14$$10, "disable_functions");
-		ZEPHIR_CALL_FUNCTION(&_15$$10, "ini_get", NULL, 62, &_14$$10);
+		ZEPHIR_CALL_FUNCTION(&_15$$10, "ini_get", NULL, 63, &_14$$10);
 		zephir_check_call_status();
 		zephir_cast_to_string(&_16$$10, &_15$$10);
 		ZEPHIR_INIT_VAR(&disabledFunctions$$10);
 		zephir_fast_strtolower(&disabledFunctions$$10, &_16$$10);
 		ZEPHIR_INIT_NVAR(&_14$$10);
 		ZVAL_STRING(&_14$$10, "passthru");
-		ZEPHIR_CALL_FUNCTION(&_17$$10, "str_contains", NULL, 63, &disabledFunctions$$10, &_14$$10);
+		ZEPHIR_CALL_FUNCTION(&_17$$10, "str_contains", NULL, 64, &disabledFunctions$$10, &_14$$10);
 		zephir_check_call_status();
 		if (zephir_is_true(&_17$$10)) {
 			ZVAL_STRING(&node, "");
 		}
-		ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 64);
+		ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 65);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_14$$10);
 		ZVAL_LONG(&_18$$10, 0);
@@ -195,32 +195,32 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_SysNodeProvider, getNode)
 			if (ZEPHIR_IS_STRING(&_14$$10, "WIN")) {
 				ZEPHIR_INIT_VAR(&_21$$12);
 				ZVAL_STRING(&_21$$12, "ipconfig /all 2>&1");
-				ZEPHIR_CALL_FUNCTION(NULL, "passthru", NULL, 65, &_21$$12);
+				ZEPHIR_CALL_FUNCTION(NULL, "passthru", NULL, 66, &_21$$12);
 				zephir_check_call_status();
 				break;
 			}
 			if (ZEPHIR_IS_STRING(&_14$$10, "DAR")) {
 				ZEPHIR_INIT_VAR(&_22$$13);
 				ZVAL_STRING(&_22$$13, "ifconfig 2>&1");
-				ZEPHIR_CALL_FUNCTION(NULL, "passthru", NULL, 65, &_22$$13);
+				ZEPHIR_CALL_FUNCTION(NULL, "passthru", NULL, 66, &_22$$13);
 				zephir_check_call_status();
 				break;
 			}
 			if (ZEPHIR_IS_STRING(&_14$$10, "FRE")) {
 				ZEPHIR_INIT_VAR(&_23$$14);
 				ZVAL_STRING(&_23$$14, "netstat -i -f link 2>&1");
-				ZEPHIR_CALL_FUNCTION(NULL, "passthru", NULL, 65, &_23$$14);
+				ZEPHIR_CALL_FUNCTION(NULL, "passthru", NULL, 66, &_23$$14);
 				zephir_check_call_status();
 				break;
 			}
 			ZEPHIR_INIT_VAR(&_24$$15);
 			ZVAL_STRING(&_24$$15, "netstat -ie 2>&1");
-			ZEPHIR_CALL_FUNCTION(NULL, "passthru", NULL, 65, &_24$$15);
+			ZEPHIR_CALL_FUNCTION(NULL, "passthru", NULL, 66, &_24$$15);
 			zephir_check_call_status();
 			break;
 		} while(0);
 
-		ZEPHIR_CALL_FUNCTION(&_25$$10, "ob_get_clean", NULL, 66);
+		ZEPHIR_CALL_FUNCTION(&_25$$10, "ob_get_clean", NULL, 67);
 		zephir_check_call_status();
 		zephir_cast_to_string(&_26$$10, &_25$$10);
 		ZEPHIR_CPY_WRT(&ifconfig$$10, &_26$$10);

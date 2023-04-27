@@ -13,12 +13,11 @@
 
 #include "kernel/main.h"
 #include "kernel/operators.h"
-#include "kernel/time.h"
 #include "kernel/memory.h"
-#include "kernel/concat.h"
-#include "kernel/string.h"
 #include "kernel/fcall.h"
 #include "kernel/object.h"
+#include "kernel/string.h"
+#include "kernel/concat.h"
 
 
 ZEPHIR_INIT_CLASS(Sparrow_Encryption_Security_Uuid_Uuid1)
@@ -36,54 +35,45 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_Uuid1, __construct)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *uuid_param = NULL, *node = NULL, node_sub, __$false, __$null, time$$3, _0$$3, _1$$3, _2$$3, _3$$3, _4$$3, _5$$3, _6$$3, _7$$3, _8$$3, _9$$3, clockSeq$$3, _14$$3, _15$$3, _16$$3, _17$$3, _18$$3, _19$$3, _20$$3, _21$$3, _10$$5, _11$$6, _12$$6, _13$$7;
-	zval uuid;
+	zval *time = NULL, time_sub, *node = NULL, node_sub, __$null, _0, _1, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _2$$5, _3$$6, _4$$6, _5$$7;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&uuid);
+	ZVAL_UNDEF(&time_sub);
 	ZVAL_UNDEF(&node_sub);
-	ZVAL_BOOL(&__$false, 0);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&time$$3);
-	ZVAL_UNDEF(&_0$$3);
-	ZVAL_UNDEF(&_1$$3);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$3);
-	ZVAL_UNDEF(&_5$$3);
-	ZVAL_UNDEF(&_6$$3);
-	ZVAL_UNDEF(&_7$$3);
-	ZVAL_UNDEF(&_8$$3);
-	ZVAL_UNDEF(&_9$$3);
-	ZVAL_UNDEF(&clockSeq$$3);
-	ZVAL_UNDEF(&_14$$3);
-	ZVAL_UNDEF(&_15$$3);
-	ZVAL_UNDEF(&_16$$3);
-	ZVAL_UNDEF(&_17$$3);
-	ZVAL_UNDEF(&_18$$3);
-	ZVAL_UNDEF(&_19$$3);
-	ZVAL_UNDEF(&_20$$3);
-	ZVAL_UNDEF(&_21$$3);
-	ZVAL_UNDEF(&_10$$5);
-	ZVAL_UNDEF(&_11$$6);
-	ZVAL_UNDEF(&_12$$6);
-	ZVAL_UNDEF(&_13$$7);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_6);
+	ZVAL_UNDEF(&_7);
+	ZVAL_UNDEF(&_8);
+	ZVAL_UNDEF(&_9);
+	ZVAL_UNDEF(&_10);
+	ZVAL_UNDEF(&_11);
+	ZVAL_UNDEF(&_12);
+	ZVAL_UNDEF(&_13);
+	ZVAL_UNDEF(&_14);
+	ZVAL_UNDEF(&_15);
+	ZVAL_UNDEF(&_2$$5);
+	ZVAL_UNDEF(&_3$$6);
+	ZVAL_UNDEF(&_4$$6);
+	ZVAL_UNDEF(&_5$$7);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(0, 2)
 		Z_PARAM_OPTIONAL
-		Z_PARAM_STR_OR_NULL(uuid)
+		Z_PARAM_OBJECT_OF_CLASS_OR_NULL(time, zephir_get_internal_ce(SL("datetimeinterface")))
 		Z_PARAM_ZVAL_OR_NULL(node)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 2, &uuid_param, &node);
-	if (!uuid_param) {
-		ZEPHIR_INIT_VAR(&uuid);
+	zephir_fetch_params(1, 0, 2, &time, &node);
+	if (!time) {
+		time = &time_sub;
+		ZEPHIR_CPY_WRT(time, &__$null);
 	} else {
-		zephir_get_strval(&uuid, uuid_param);
+		ZEPHIR_SEPARATE_PARAM(time);
 	}
 	if (!node) {
 		node = &node_sub;
@@ -93,74 +83,60 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_Uuid1, __construct)
 	}
 
 
-	if (ZEPHIR_IS_NULL(&uuid)) {
-		ZEPHIR_INIT_VAR(&time$$3);
-		zephir_microtime(&time$$3, &__$false);
-		ZVAL_LONG(&_0$$3, 11);
-		ZEPHIR_INIT_VAR(&_1$$3);
-		zephir_substr(&_1$$3, &time$$3, 11 , 0, ZEPHIR_SUBSTR_NO_LENGTH);
-		ZVAL_LONG(&_2$$3, 2);
-		ZVAL_LONG(&_3$$3, 7);
-		ZEPHIR_INIT_VAR(&_4$$3);
-		zephir_substr(&_4$$3, &time$$3, 2 , 7 , 0);
-		ZEPHIR_INIT_VAR(&_5$$3);
-		ZEPHIR_CONCAT_VV(&_5$$3, &_1$$3, &_4$$3);
-		ZEPHIR_CPY_WRT(&time$$3, &_5$$3);
-		ZVAL_LONG(&_6$$3, (zephir_get_numberval(&time$$3) + 0x01B21DD213814000));
-		ZEPHIR_CALL_FUNCTION(&_7$$3, "dechex", NULL, 67, &_6$$3);
+	if (Z_TYPE_P(time) == IS_NULL) {
+		ZEPHIR_INIT_NVAR(time);
+		object_init_ex(time, zephir_get_internal_ce(SL("datetimeimmutable")));
+		ZEPHIR_CALL_METHOD(NULL, time, "__construct", NULL, 0);
 		zephir_check_call_status();
-		ZVAL_LONG(&_6$$3, 16);
-		ZEPHIR_INIT_VAR(&_8$$3);
-		ZVAL_STRING(&_8$$3, "0");
-		ZVAL_LONG(&_9$$3, 0);
-		ZEPHIR_CALL_FUNCTION(&time$$3, "str_pad", NULL, 19, &_7$$3, &_6$$3, &_8$$3, &_9$$3);
-		zephir_check_call_status();
-		ZVAL_LONG(&_6$$3, 0x3FFF);
-		ZEPHIR_CALL_METHOD(&clockSeq$$3, this_ptr, "number", NULL, 0, &_6$$3);
-		zephir_check_call_status();
-		if (Z_TYPE_P(node) == IS_NULL) {
-			if ((zephir_function_exists_ex(ZEND_STRL("apcu_fetch")) == SUCCESS)) {
-				ZEPHIR_INIT_VAR(&_10$$5);
-				ZVAL_STRING(&_10$$5, "__phalcon_uuid_node");
-				ZEPHIR_CALL_FUNCTION(node, "apcu_fetch", NULL, 68, &_10$$5);
+	}
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "datetimetohex", NULL, 0, time);
+	zephir_check_call_status();
+	ZEPHIR_CPY_WRT(time, &_0);
+	ZVAL_LONG(&_1, 0x3FFF);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "number", NULL, 0, &_1);
+	zephir_check_call_status();
+	zephir_update_static_property_ce(sparrow_encryption_security_uuid_uuid1_ce, ZEND_STRL("clockSeq"), &_0);
+	if (Z_TYPE_P(node) == IS_NULL) {
+		if ((zephir_function_exists_ex(ZEND_STRL("apcu_fetch")) == SUCCESS)) {
+			ZEPHIR_INIT_VAR(&_2$$5);
+			ZVAL_STRING(&_2$$5, "__phalcon_uuid_node");
+			ZEPHIR_CALL_FUNCTION(node, "apcu_fetch", NULL, 68, &_2$$5);
+			zephir_check_call_status();
+			if (ZEPHIR_IS_FALSE_IDENTICAL(node)) {
+				ZEPHIR_CALL_METHOD(&_3$$6, this_ptr, "getnodeprovider", NULL, 0);
 				zephir_check_call_status();
-				if (ZEPHIR_IS_FALSE_IDENTICAL(node)) {
-					ZEPHIR_CALL_METHOD(&_11$$6, this_ptr, "getnodeprovider", NULL, 0);
-					zephir_check_call_status();
-					ZEPHIR_CALL_METHOD(node, &_11$$6, "getnode", NULL, 0);
-					zephir_check_call_status();
-					ZEPHIR_INIT_VAR(&_12$$6);
-					ZVAL_STRING(&_12$$6, "__phalcon_uuid_node");
-					ZEPHIR_CALL_FUNCTION(NULL, "apcu_store", NULL, 69, &_12$$6, node);
-					zephir_check_call_status();
-				}
-			} else {
-				ZEPHIR_CALL_METHOD(&_13$$7, this_ptr, "getnodeprovider", NULL, 0);
+				ZEPHIR_CALL_METHOD(node, &_3$$6, "getnode", NULL, 0);
 				zephir_check_call_status();
-				ZEPHIR_CALL_METHOD(node, &_13$$7, "getnode", NULL, 0);
+				ZEPHIR_INIT_VAR(&_4$$6);
+				ZVAL_STRING(&_4$$6, "__phalcon_uuid_node");
+				ZEPHIR_CALL_FUNCTION(NULL, "apcu_store", NULL, 69, &_4$$6, node);
 				zephir_check_call_status();
 			}
+		} else {
+			ZEPHIR_CALL_METHOD(&_5$$7, this_ptr, "getnodeprovider", NULL, 0);
+			zephir_check_call_status();
+			ZEPHIR_CALL_METHOD(node, &_5$$7, "getnode", NULL, 0);
+			zephir_check_call_status();
 		}
-		ZVAL_LONG(&_6$$3, -8);
-		ZEPHIR_INIT_NVAR(&_8$$3);
-		zephir_substr(&_8$$3, &time$$3, -8 , 0, ZEPHIR_SUBSTR_NO_LENGTH);
-		ZVAL_LONG(&_9$$3, -12);
-		ZVAL_LONG(&_14$$3, 4);
-		ZEPHIR_INIT_VAR(&_15$$3);
-		zephir_substr(&_15$$3, &time$$3, -12 , 4 , 0);
-		ZVAL_LONG(&_16$$3, -15);
-		ZVAL_LONG(&_17$$3, 3);
-		ZEPHIR_INIT_VAR(&_18$$3);
-		zephir_substr(&_18$$3, &time$$3, -15 , 3 , 0);
-		ZEPHIR_INIT_VAR(&_19$$3);
-		ZVAL_STRING(&_19$$3, "%08s-%04s-1%03s-%04x-%012s");
-		ZVAL_LONG(&_20$$3, ((int) (zephir_get_numberval(&clockSeq$$3)) | 0x8000));
-		ZEPHIR_CALL_FUNCTION(&_21$$3, "sprintf", NULL, 9, &_19$$3, &_8$$3, &_15$$3, &_18$$3, &_20$$3, node);
-		zephir_check_call_status();
-		zephir_update_property_zval(this_ptr, ZEND_STRL("uid"), &_21$$3);
-	} else {
-		zephir_update_property_zval(this_ptr, ZEND_STRL("uid"), &uuid);
 	}
+	ZVAL_LONG(&_1, -8);
+	ZEPHIR_INIT_VAR(&_6);
+	zephir_substr(&_6, time, -8 , 0, ZEPHIR_SUBSTR_NO_LENGTH);
+	ZVAL_LONG(&_7, -12);
+	ZVAL_LONG(&_8, 4);
+	ZEPHIR_INIT_VAR(&_9);
+	zephir_substr(&_9, time, -12 , 4 , 0);
+	ZVAL_LONG(&_10, -15);
+	ZVAL_LONG(&_11, 3);
+	ZEPHIR_INIT_VAR(&_12);
+	zephir_substr(&_12, time, -15 , 3 , 0);
+	zephir_read_static_property_ce(&_13, sparrow_encryption_security_uuid_uuid1_ce, SL("clockSeq"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_14);
+	ZVAL_STRING(&_14, "%08s-%04s-1%03s-%04x-%012s");
+	ZVAL_LONG(&_15, ((int) (zephir_get_numberval(&_13)) | 0x8000));
+	ZEPHIR_CALL_FUNCTION(&_0, "sprintf", NULL, 9, &_14, &_6, &_9, &_12, &_15, node);
+	zephir_check_call_status();
+	zephir_update_property_zval(this_ptr, ZEND_STRL("uid"), &_0);
 	ZEPHIR_MM_RESTORE();
 }
 

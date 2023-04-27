@@ -68,10 +68,10 @@ PHP_METHOD(Sparrow_Encryption_Crypt_Padding_Zero, pad)
 
 
 	ZVAL_LONG(&_0, 0);
-	ZEPHIR_CALL_FUNCTION(&_1, "chr", NULL, 42, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "chr", NULL, 43, &_0);
 	zephir_check_call_status();
 	ZVAL_LONG(&_0, paddingSize);
-	ZEPHIR_RETURN_CALL_FUNCTION("str_repeat", NULL, 43, &_1, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("str_repeat", NULL, 44, &_1, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -113,9 +113,9 @@ PHP_METHOD(Sparrow_Encryption_Crypt_Padding_Zero, unpad)
 	blockSize = zephir_get_intval(blockSize_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&length, "mb_strlen", NULL, 30, &input);
+	ZEPHIR_CALL_FUNCTION(&length, "mb_strlen", NULL, 31, &input);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&inputArray, "str_split", NULL, 46, &input);
+	ZEPHIR_CALL_FUNCTION(&inputArray, "str_split", NULL, 47, &input);
 	zephir_check_call_status();
 	counter = (zephir_get_numberval(&length) - 1);
 	paddingSize = 0;
@@ -124,7 +124,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt_Padding_Zero, unpad)
 		if (_0) {
 			zephir_array_fetch_long(&_1, &inputArray, counter, PH_NOISY | PH_READONLY, "sparrow/Encryption/Crypt/Padding/Zero.zep", 48);
 			ZVAL_LONG(&_2, 0);
-			ZEPHIR_CALL_FUNCTION(&_3, "chr", &_4, 42, &_2);
+			ZEPHIR_CALL_FUNCTION(&_3, "chr", &_4, 43, &_2);
 			zephir_check_call_status();
 			_0 = ZEPHIR_IS_EQUAL(&_1, &_3);
 		}

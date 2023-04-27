@@ -12,6 +12,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid, v6);
 PHP_METHOD(Sparrow_Encryption_Security_Uuid, parse);
 PHP_METHOD(Sparrow_Encryption_Security_Uuid, format);
 PHP_METHOD(Sparrow_Encryption_Security_Uuid, hexToDateTime);
+PHP_METHOD(Sparrow_Encryption_Security_Uuid, dateTimeToHex);
 PHP_METHOD(Sparrow_Encryption_Security_Uuid, toString);
 PHP_METHOD(Sparrow_Encryption_Security_Uuid, getNodeProvider);
 PHP_METHOD(Sparrow_Encryption_Security_Uuid, __toString);
@@ -54,6 +55,10 @@ ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_sparrow_encryption_security_uuid_
 	ZEND_ARG_INFO(0, time)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_sparrow_encryption_security_uuid_datetimetohex, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, time, \\DateTimeInterface, 0)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_sparrow_encryption_security_uuid_tostring, 0, 0, 1)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
@@ -77,6 +82,7 @@ ZEPHIR_INIT_FUNCS(sparrow_encryption_security_uuid_method_entry) {
 	PHP_ME(Sparrow_Encryption_Security_Uuid, parse, arginfo_sparrow_encryption_security_uuid_parse, ZEND_ACC_PRIVATE|ZEND_ACC_STATIC)
 	PHP_ME(Sparrow_Encryption_Security_Uuid, format, arginfo_sparrow_encryption_security_uuid_format, ZEND_ACC_PROTECTED)
 	PHP_ME(Sparrow_Encryption_Security_Uuid, hexToDateTime, arginfo_sparrow_encryption_security_uuid_hextodatetime, ZEND_ACC_PROTECTED)
+	PHP_ME(Sparrow_Encryption_Security_Uuid, dateTimeToHex, arginfo_sparrow_encryption_security_uuid_datetimetohex, ZEND_ACC_PUBLIC)
 	PHP_ME(Sparrow_Encryption_Security_Uuid, toString, arginfo_sparrow_encryption_security_uuid_tostring, ZEND_ACC_PRIVATE|ZEND_ACC_STATIC)
 #if PHP_VERSION_ID >= 80000
 	PHP_ME(Sparrow_Encryption_Security_Uuid, getNodeProvider, arginfo_sparrow_encryption_security_uuid_getnodeprovider, ZEND_ACC_PUBLIC)

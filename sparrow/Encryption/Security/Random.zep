@@ -83,9 +83,9 @@ use Sparrow\Encryption\Security\Uuid\Uuid6;
  */
 class Random extends BinaryBase
 {
-    public function uuid1(string uuid = null, string node = null) -> <Uuid>
+    public function uuid1(var time = null, var node = null) -> <Uuid>
     {
-        return new Uuid1(uuid);
+        return new Uuid1(time, node);
     }
 
     public function uuid3(var ns, string name) -> <Uuid>

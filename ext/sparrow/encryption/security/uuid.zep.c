@@ -96,17 +96,17 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid, mac)
 	}
 	ZEPHIR_CALL_SELF(&parsed, "parse", &_5, 11, &reUuid);
 	zephir_check_call_status();
-	zephir_array_fetch_string(&_6, &parsed, SL("version"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 44);
+	zephir_array_fetch_string(&_6, &parsed, SL("version"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 45);
 	if (!ZEPHIR_IS_LONG_IDENTICAL(&_6, 1)) {
 		ZEPHIR_INIT_VAR(&_7$$4);
 		ZEPHIR_GET_CONSTANT(&_7$$4, "PHP_VERSION_ID");
 		if (ZEPHIR_LT_LONG(&_7$$4, 80000)) {
 			RETURN_MM_NULL();
 		}
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_ce_value_error, "mac(): Argument #1 ($uuid) UUID DCE TIME expected", "sparrow/Encryption/Security/Uuid.zep", 49);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_ce_value_error, "mac(): Argument #1 ($uuid) UUID DCE TIME expected", "sparrow/Encryption/Security/Uuid.zep", 50);
 		return;
 	}
-	zephir_array_fetch_string(&_8, &parsed, SL("node"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 52);
+	zephir_array_fetch_string(&_8, &parsed, SL("node"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 53);
 	ZEPHIR_INIT_VAR(&_9);
 	ZVAL_STRING(&_9, "ABCDEF");
 	ZEPHIR_INIT_VAR(&_10);
@@ -283,22 +283,22 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid, parse)
 		RETURN_MM_NULL();
 	}
 	zephir_create_array(return_value, 4, 0);
-	zephir_array_fetch_string(&_3, &matches, SL("time_hi"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 89);
-	zephir_array_fetch_string(&_4, &matches, SL("time_mid"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 89);
-	zephir_array_fetch_string(&_5, &matches, SL("time_low"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 89);
+	zephir_array_fetch_string(&_3, &matches, SL("time_hi"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 90);
+	zephir_array_fetch_string(&_4, &matches, SL("time_mid"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 90);
+	zephir_array_fetch_string(&_5, &matches, SL("time_low"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 90);
 	ZEPHIR_INIT_VAR(&_6);
 	ZEPHIR_CONCAT_SVVV(&_6, "0", &_3, &_4, &_5);
 	zephir_array_update_string(return_value, SL("time"), &_6, PH_COPY | PH_SEPARATE);
-	zephir_array_fetch_string(&_7, &matches, SL("version"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 90);
+	zephir_array_fetch_string(&_7, &matches, SL("version"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 91);
 	ZEPHIR_CALL_FUNCTION(&_8, "hexdec", NULL, 17, &_7);
 	zephir_check_call_status();
 	zephir_array_update_string(return_value, SL("version"), &_8, PH_COPY | PH_SEPARATE);
-	zephir_array_fetch_string(&_9, &matches, SL("clock_seq"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 91);
+	zephir_array_fetch_string(&_9, &matches, SL("clock_seq"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 92);
 	ZEPHIR_CALL_FUNCTION(&_8, "hexdec", NULL, 17, &_9);
 	zephir_check_call_status();
 	zephir_array_update_string(return_value, SL("clock_seq"), &_8, PH_COPY | PH_SEPARATE);
 	ZEPHIR_OBS_VAR(&_10);
-	zephir_array_fetch_string(&_10, &matches, SL("node"), PH_NOISY, "sparrow/Encryption/Security/Uuid.zep", 93);
+	zephir_array_fetch_string(&_10, &matches, SL("node"), PH_NOISY, "sparrow/Encryption/Security/Uuid.zep", 94);
 	zephir_array_update_string(return_value, SL("node"), &_10, PH_COPY | PH_SEPARATE);
 	RETURN_MM();
 }
@@ -426,7 +426,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid, hexToDateTime)
 	ZEPHIR_CPY_WRT(time, &_2);
 	if (9 > zephir_fast_strlen_ev(time)) {
 		ZEPHIR_INIT_VAR(&_3$$3);
-		zephir_array_fetch_long(&_4$$3, time, 0, PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 113);
+		zephir_array_fetch_long(&_4$$3, time, 0, PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 114);
 		ZEPHIR_INIT_VAR(&_5$$3);
 		ZVAL_STRING(&_5$$3, "-");
 		if (ZEPHIR_IS_IDENTICAL(&_5$$3, &_4$$3)) {
@@ -463,6 +463,56 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid, hexToDateTime)
 	ZEPHIR_RETURN_CALL_CE_STATIC(_12, "createfromformat", NULL, 0, &_13, &_2);
 	zephir_check_call_status();
 	RETURN_MM();
+}
+
+PHP_METHOD(Sparrow_Encryption_Security_Uuid, dateTimeToHex)
+{
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *time = NULL, time_sub, _0, _1$$3, _2$$3, _3$$3, _4$$3, _5$$3;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&time_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_4$$3);
+	ZVAL_UNDEF(&_5$$3);
+#if PHP_VERSION_ID >= 80000
+	bool is_null_true = 1;
+	ZEND_PARSE_PARAMETERS_START(1, 1)
+		Z_PARAM_OBJECT_OF_CLASS(time, zephir_get_internal_ce(SL("datetimeinterface")))
+	ZEND_PARSE_PARAMETERS_END();
+#endif
+
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &time);
+	ZEPHIR_SEPARATE_PARAM(time);
+
+
+	ZEPHIR_INIT_VAR(&_0);
+	ZEPHIR_GET_CONSTANT(&_0, "PHP_INT_SIZE");
+	if (ZEPHIR_GE_LONG(&_0, 8)) {
+		ZEPHIR_INIT_VAR(&_2$$3);
+		ZVAL_STRING(&_2$$3, "Uu0");
+		ZEPHIR_CALL_METHOD(&_1$$3, time, "format", NULL, 0, &_2$$3);
+		zephir_check_call_status();
+		ZEPHIR_INIT_NVAR(time);
+		ZVAL_LONG(time, zephir_get_intval(&_1$$3));
+		ZVAL_LONG(&_3$$3, (zephir_get_numberval(time) + 0x01B21DD213814000));
+		ZEPHIR_CALL_FUNCTION(&_4$$3, "dechex", NULL, 21, &_3$$3);
+		zephir_check_call_status();
+		ZVAL_LONG(&_3$$3, 16);
+		ZEPHIR_INIT_NVAR(&_2$$3);
+		ZVAL_STRING(&_2$$3, "0");
+		ZVAL_LONG(&_5$$3, 0);
+		ZEPHIR_RETURN_CALL_FUNCTION("str_pad", NULL, 19, &_4$$3, &_3$$3, &_2$$3, &_5$$3);
+		zephir_check_call_status();
+		RETURN_MM();
+	}
+	ZEPHIR_MM_RESTORE();
 }
 
 PHP_METHOD(Sparrow_Encryption_Security_Uuid, toString)

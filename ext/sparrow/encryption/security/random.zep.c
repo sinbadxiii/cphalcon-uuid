@@ -14,8 +14,8 @@
 #include "kernel/main.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
-#include "kernel/operators.h"
 #include "kernel/object.h"
+#include "kernel/operators.h"
 
 
 /**
@@ -102,38 +102,36 @@ PHP_METHOD(Sparrow_Encryption_Security_Random, uuid1)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *uuid_param = NULL, *node_param = NULL;
-	zval uuid, node;
+	zval *time = NULL, time_sub, *node = NULL, node_sub, __$null;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&uuid);
-	ZVAL_UNDEF(&node);
+	ZVAL_UNDEF(&time_sub);
+	ZVAL_UNDEF(&node_sub);
+	ZVAL_NULL(&__$null);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(0, 2)
 		Z_PARAM_OPTIONAL
-		Z_PARAM_STR_OR_NULL(uuid)
-		Z_PARAM_STR_OR_NULL(node)
+		Z_PARAM_ZVAL_OR_NULL(time)
+		Z_PARAM_ZVAL_OR_NULL(node)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 2, &uuid_param, &node_param);
-	if (!uuid_param) {
-		ZEPHIR_INIT_VAR(&uuid);
-	} else {
-		zephir_get_strval(&uuid, uuid_param);
+	zephir_fetch_params(1, 0, 2, &time, &node);
+	if (!time) {
+		time = &time_sub;
+		time = &__$null;
 	}
-	if (!node_param) {
-		ZEPHIR_INIT_VAR(&node);
-	} else {
-		zephir_get_strval(&node, node_param);
+	if (!node) {
+		node = &node_sub;
+		node = &__$null;
 	}
 
 
 	object_init_ex(return_value, sparrow_encryption_security_uuid_uuid1_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 12, &uuid);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 12, time, node);
 	zephir_check_call_status();
 	RETURN_MM();
 }

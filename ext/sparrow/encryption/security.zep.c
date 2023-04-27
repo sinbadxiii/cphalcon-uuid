@@ -227,7 +227,7 @@ PHP_METHOD(Sparrow_Encryption_Security, checkHash)
 	if (_0) {
 		RETURN_MM_BOOL(0);
 	}
-	ZEPHIR_RETURN_CALL_FUNCTION("password_verify", NULL, 47, &password, &passwordHash);
+	ZEPHIR_RETURN_CALL_FUNCTION("password_verify", NULL, 48, &password, &passwordHash);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -287,13 +287,13 @@ PHP_METHOD(Sparrow_Encryption_Security, checkToken)
 	}
 
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "processtokenkey", NULL, 48, &tokenKey);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "processtokenkey", NULL, 49, &tokenKey);
 	zephir_check_call_status();
 	zephir_get_strval(&tokenKey, &_0);
 	if (!(!(ZEPHIR_IS_EMPTY(&tokenKey)))) {
 		RETURN_MM_BOOL(0);
 	}
-	ZEPHIR_CALL_METHOD(&userToken, this_ptr, "processusertoken", NULL, 49, &tokenKey, tokenValue);
+	ZEPHIR_CALL_METHOD(&userToken, this_ptr, "processusertoken", NULL, 50, &tokenKey, tokenValue);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&knownToken, this_ptr, "getrequesttoken", NULL, 0);
 	zephir_check_call_status();
@@ -371,7 +371,7 @@ PHP_METHOD(Sparrow_Encryption_Security, computeHmac)
 
 
 	ZVAL_BOOL(&_0, (raw ? 1 : 0));
-	ZEPHIR_CALL_FUNCTION(&hmac, "hash_hmac", NULL, 26, &algo, &data, &key, &_0);
+	ZEPHIR_CALL_FUNCTION(&hmac, "hash_hmac", NULL, 27, &algo, &data, &key, &_0);
 	zephir_check_call_status();
 	if (UNEXPECTED(!zephir_is_true(&hmac))) {
 		ZEPHIR_INIT_VAR(&_1$$3);
@@ -380,7 +380,7 @@ PHP_METHOD(Sparrow_Encryption_Security, computeHmac)
 		ZVAL_STRING(&_2$$3, "Unknown hashing algorithm: %s");
 		ZEPHIR_CALL_FUNCTION(&_3$$3, "sprintf", NULL, 9, &_2$$3, &algo);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 33, &_3$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 34, &_3$$3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_1$$3, "sparrow/Encryption/Security.zep", 219);
 		ZEPHIR_MM_RESTORE();
@@ -472,7 +472,7 @@ PHP_METHOD(Sparrow_Encryption_Security, getHashInformation)
 	zephir_get_strval(&hash, hash_param);
 
 
-	ZEPHIR_RETURN_CALL_FUNCTION("password_get_info", NULL, 50, &hash);
+	ZEPHIR_RETURN_CALL_FUNCTION("password_get_info", NULL, 51, &hash);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -790,7 +790,7 @@ PHP_METHOD(Sparrow_Encryption_Security, hash)
 	}
 
 
-	ZEPHIR_CALL_METHOD(&cost, this_ptr, "processcost", NULL, 51, &options);
+	ZEPHIR_CALL_METHOD(&cost, this_ptr, "processcost", NULL, 52, &options);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "%02s");
@@ -845,7 +845,7 @@ PHP_METHOD(Sparrow_Encryption_Security, hash)
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&salt);
 		ZEPHIR_CONCAT_VVS(&salt, &prefix, &_4$$9, "$");
-		ZEPHIR_RETURN_CALL_FUNCTION("crypt", NULL, 52, &password, &salt);
+		ZEPHIR_RETURN_CALL_FUNCTION("crypt", NULL, 53, &password, &salt);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
@@ -853,11 +853,11 @@ PHP_METHOD(Sparrow_Encryption_Security, hash)
 	zephir_create_array(&_6, 1, 0);
 	zephir_array_update_string(&_6, SL("cost"), &cost, PH_COPY | PH_SEPARATE);
 	ZEPHIR_CPY_WRT(&options, &_6);
-	ZEPHIR_CALL_METHOD(&algorithm, this_ptr, "processalgorithm", NULL, 53);
+	ZEPHIR_CALL_METHOD(&algorithm, this_ptr, "processalgorithm", NULL, 54);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&arguments, this_ptr, "processargonoptions", NULL, 54, &options);
+	ZEPHIR_CALL_METHOD(&arguments, this_ptr, "processargonoptions", NULL, 55, &options);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("password_hash", NULL, 55, &password, &algorithm, &arguments);
+	ZEPHIR_RETURN_CALL_FUNCTION("password_hash", NULL, 56, &password, &algorithm, &arguments);
 	zephir_check_call_status();
 	RETURN_MM();
 }

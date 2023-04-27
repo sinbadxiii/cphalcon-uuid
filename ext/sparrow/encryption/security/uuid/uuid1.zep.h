@@ -8,7 +8,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_Uuid1, getDateTime);
 PHP_METHOD(Sparrow_Encryption_Security_Uuid_Uuid1, getNode);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_sparrow_encryption_security_uuid_uuid1___construct, 0, 0, 0)
-	ZEND_ARG_TYPE_INFO(0, uuid, IS_STRING, 1)
+	ZEND_ARG_OBJ_INFO(0, time, \\DateTimeInterface, 1)
 	ZEND_ARG_INFO(0, node)
 ZEND_END_ARG_INFO()
 

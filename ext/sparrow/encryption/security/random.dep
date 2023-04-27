@@ -131,5 +131,5 @@ sparrow/encryption/security/random.lo: \
  /usr/include/php/20220829/Zend/zend_constants.h kernel/exception.h \
  kernel/fcall.h php_ext.h php_phalcon_uuid.h kernel/memory.h \
  kernel/globals.h kernel/fcall_internal.h \
- /usr/include/php/20220829/Zend/zend_hash.h kernel/operators.h \
- kernel/object.h
+ /usr/include/php/20220829/Zend/zend_hash.h kernel/object.h \
+ kernel/operators.h

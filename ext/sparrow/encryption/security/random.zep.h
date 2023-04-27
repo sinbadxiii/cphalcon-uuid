@@ -11,8 +11,8 @@ PHP_METHOD(Sparrow_Encryption_Security_Random, uuid6);
 PHP_METHOD(Sparrow_Encryption_Security_Random, uuid);
 
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_sparrow_encryption_security_random_uuid1, 0, 0, Sparrow\\Encryption\\Security\\Uuid, 0)
-	ZEND_ARG_TYPE_INFO(0, uuid, IS_STRING, 1)
-	ZEND_ARG_TYPE_INFO(0, node, IS_STRING, 1)
+	ZEND_ARG_INFO(0, time)
+	ZEND_ARG_INFO(0, node)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_sparrow_encryption_security_random_uuid3, 0, 2, Sparrow\\Encryption\\Security\\Uuid, 0)

@@ -3,6 +3,7 @@ namespace Sparrow\Encryption\Security;
 use ValueError;
 use \DateTimeImmutable;
 use \InvalidArgumentException;
+use \DateTimeInterface;
 use Sparrow\Encryption\Security\Uuid\Uuid1;
 use Sparrow\Encryption\Security\Uuid\Uuid3;
 use Sparrow\Encryption\Security\Uuid\Uuid4;
@@ -114,6 +115,14 @@ class Uuid extends BinaryBase
        }
 
        return DateTimeImmutable::createFromFormat("U.u?", substr_replace(time, ".", -7, 0));
+    }
+
+    public function dateTimeToHex(<DateTimeInterface> time)
+    {
+        if (PHP_INT_SIZE >= 8) {
+            let time = (int) time->format("Uu0");
+            return str_pad(dechex(time + self::TIME_OFFSET_INT), 16, "0", STR_PAD_LEFT);
+        }
     }
 
     private static function toString(var value)
