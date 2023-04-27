@@ -1,6 +1,6 @@
 # Phalcon Uuid
 
-The library allows you to generate uuid 1-5 versions (for now).
+The library allows you to generate uuid 1-6 versions (for now).
 
 ## Install
 
@@ -51,7 +51,15 @@ $uuid->uuid5($uuid->uuid4(), "name") //48edad3f-881b-568d-b998-5c8c3ed20728
 $uuid->uuid5($uuid->uuid4(), "name") //cafcfaf8-e83f-5e7e-9a23-7039010f5168
 
 //version 6
-//in developing
+//first 
+$random->uuid6(); //1ede4ea1-7725-6670-916f-f9e288af019f 
+$random->uuid6(); //1ede4ea1-7725-6770-be3c-f9e288af019f
+$random->uuid6(); //1ede4ea1-7725-67e0-8837-f9e288af019f
+...
+//second
+$random->uuid6(); //1ede4eac-294b-6fe0-bedf-313f2e13333a
+$random->uuid6(); //1ede4eac-294c-6120-a6fb-313f2e13333a
+$random->uuid6(); //1ede4eac-294c-61a0-9490-313f2e13333a
 ```
 
 
