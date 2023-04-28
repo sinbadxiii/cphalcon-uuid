@@ -18,7 +18,6 @@ if test "$PHP_PHALCON_UUID" = "yes"; then
 	sparrow/encryption/crypt/exception/exception.zep.c
 	sparrow/encryption/crypt.zep.c
 	sparrow/encryption/crypt/exception/mismatch.zep.c
-	sparrow/encryption/crypt/padfactory.zep.c
 	sparrow/encryption/crypt/padding/ansi.zep.c
 	sparrow/encryption/crypt/padding/iso10126.zep.c
 	sparrow/encryption/crypt/padding/isoiek.zep.c

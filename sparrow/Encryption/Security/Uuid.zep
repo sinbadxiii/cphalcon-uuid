@@ -1,9 +1,9 @@
 namespace Sparrow\Encryption\Security;
 
-use ValueError;
 use \DateTimeImmutable;
 use \InvalidArgumentException;
 use \DateTimeInterface;
+use \Error;
 use Sparrow\Encryption\Security\Uuid\Uuid1;
 use Sparrow\Encryption\Security\Uuid\Uuid3;
 use Sparrow\Encryption\Security\Uuid\Uuid4;
@@ -47,15 +47,15 @@ class Uuid extends BinaryBase
                 return null;
             }
 
-            throw new ValueError("mac(): Argument #1 ($uuid) UUID DCE TIME expected");
+            throw new Error("mac(): Argument #1 ($uuid) UUID DCE TIME expected");
         }
 
         return strtr(parsed["node"], "ABCDEF", "abcdef");
     }
 
-    final public static function v1(string uuid = null) -> <Uuid1>
+    final public static function v1(<DateTimeInterface> time = null, var node = null) -> <Uuid1>
     {
-        return new Uuid1(uuid);
+        return new Uuid1(time, node);
     }
 
     final public static function v3(var ns, string name) -> <Uuid>
@@ -73,9 +73,9 @@ class Uuid extends BinaryBase
         return new Uuid5(ns, name);
     }
 
-    final public static function v6() -> <Uuid>
+    final public static function v6(<DateTimeInterface> time = null, var node = null) -> <Uuid>
     {
-        return new Uuid6();
+        return new Uuid6(time, node);
     }
 
     private static function parse(var uuid) -> array | null

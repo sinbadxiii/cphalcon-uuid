@@ -103,7 +103,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid, mac)
 		if (ZEPHIR_LT_LONG(&_7$$4, 80000)) {
 			RETURN_MM_NULL();
 		}
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_ce_value_error, "mac(): Argument #1 ($uuid) UUID DCE TIME expected", "sparrow/Encryption/Security/Uuid.zep", 50);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zephir_get_internal_ce(SL("error")), "mac(): Argument #1 ($uuid) UUID DCE TIME expected", "sparrow/Encryption/Security/Uuid.zep", 50);
 		return;
 	}
 	zephir_array_fetch_string(&_8, &parsed, SL("node"), PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid.zep", 53);
@@ -120,31 +120,36 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid, v1)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *uuid_param = NULL;
-	zval uuid;
+	zval *time = NULL, time_sub, *node = NULL, node_sub, __$null;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&uuid);
+	ZVAL_UNDEF(&time_sub);
+	ZVAL_UNDEF(&node_sub);
+	ZVAL_NULL(&__$null);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
-	ZEND_PARSE_PARAMETERS_START(0, 1)
+	ZEND_PARSE_PARAMETERS_START(0, 2)
 		Z_PARAM_OPTIONAL
-		Z_PARAM_STR_OR_NULL(uuid)
+		Z_PARAM_OBJECT_OF_CLASS_OR_NULL(time, zephir_get_internal_ce(SL("datetimeinterface")))
+		Z_PARAM_ZVAL_OR_NULL(node)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &uuid_param);
-	if (!uuid_param) {
-		ZEPHIR_INIT_VAR(&uuid);
-	} else {
-		zephir_get_strval(&uuid, uuid_param);
+	zephir_fetch_params(1, 0, 2, &time, &node);
+	if (!time) {
+		time = &time_sub;
+		time = &__$null;
+	}
+	if (!node) {
+		node = &node_sub;
+		node = &__$null;
 	}
 
 
 	object_init_ex(return_value, sparrow_encryption_security_uuid_uuid1_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 12, &uuid);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 12, time, node);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -229,14 +234,36 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid, v6)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *time = NULL, time_sub, *node = NULL, node_sub, __$null;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&time_sub);
+	ZVAL_UNDEF(&node_sub);
+	ZVAL_NULL(&__$null);
+#if PHP_VERSION_ID >= 80000
+	bool is_null_true = 1;
+	ZEND_PARSE_PARAMETERS_START(0, 2)
+		Z_PARAM_OPTIONAL
+		Z_PARAM_OBJECT_OF_CLASS_OR_NULL(time, zephir_get_internal_ce(SL("datetimeinterface")))
+		Z_PARAM_ZVAL_OR_NULL(node)
+	ZEND_PARSE_PARAMETERS_END();
+#endif
 
 
 	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 2, &time, &node);
+	if (!time) {
+		time = &time_sub;
+		time = &__$null;
+	}
+	if (!node) {
+		node = &node_sub;
+		node = &__$null;
+	}
+
 
 	object_init_ex(return_value, sparrow_encryption_security_uuid_uuid6_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 16);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 16, time, node);
 	zephir_check_call_status();
 	RETURN_MM();
 }

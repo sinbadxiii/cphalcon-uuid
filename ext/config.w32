@@ -13,7 +13,7 @@ if (PHP_PHALCON_UUID != "no") {
   ADD_SOURCES(configure_module_dirname + "/sparrow/encryption/crypt/padding", "padinterface.zep.c ansi.zep.c iso10126.zep.c isoiek.zep.c noop.zep.c pkcs7.zep.c space.zep.c zero.zep.c", "phalcon_uuid");
 	ADD_SOURCES(configure_module_dirname + "/sparrow/encryption/security", "binarybase.zep.c uuid.zep.c exception.zep.c random.zep.c", "phalcon_uuid");
 	ADD_SOURCES(configure_module_dirname + "/sparrow/encryption/security/uuid", "nodeproviderinterface.zep.c timebaseduidinterface.zep.c randomnodeprovider.zep.c sysnodeprovider.zep.c uuid1.zep.c uuid3.zep.c uuid4.zep.c uuid5.zep.c uuid6.zep.c", "phalcon_uuid");
-	ADD_SOURCES(configure_module_dirname + "/sparrow/encryption/crypt", "cryptinterface.zep.c padfactory.zep.c", "phalcon_uuid");
+	ADD_SOURCES(configure_module_dirname + "/sparrow/encryption/crypt", "cryptinterface.zep.c", "phalcon_uuid");
 	ADD_SOURCES(configure_module_dirname + "/sparrow/encryption/crypt/exception", "exception.zep.c mismatch.zep.c", "phalcon_uuid");
 	ADD_SOURCES(configure_module_dirname + "/sparrow/encryption", "crypt.zep.c security.zep.c", "phalcon_uuid");
 	ADD_SOURCES(configure_module_dirname + "/sparrow", "0__closure.zep.c", "phalcon_uuid");

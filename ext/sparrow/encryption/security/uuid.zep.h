@@ -23,7 +23,8 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_sparrow_encryption_security_uuid
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_sparrow_encryption_security_uuid_v1, 0, 0, Sparrow\\Encryption\\Security\\Uuid\\Uuid1, 0)
-	ZEND_ARG_TYPE_INFO(0, uuid, IS_STRING, 1)
+	ZEND_ARG_OBJ_INFO(0, time, \\DateTimeInterface, 1)
+	ZEND_ARG_INFO(0, node)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_sparrow_encryption_security_uuid_v3, 0, 2, Sparrow\\Encryption\\Security\\Uuid, 0)
@@ -40,6 +41,8 @@ ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_sparrow_encryption_security_uuid_
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_sparrow_encryption_security_uuid_v6, 0, 0, Sparrow\\Encryption\\Security\\Uuid, 0)
+	ZEND_ARG_OBJ_INFO(0, time, \\DateTimeInterface, 1)
+	ZEND_ARG_INFO(0, node)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_sparrow_encryption_security_uuid_parse, 0, 1, IS_ARRAY, 1)

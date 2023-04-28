@@ -13,7 +13,6 @@ namespace Sparrow\Encryption;
 use Sparrow\Encryption\Crypt\CryptInterface;
 use Sparrow\Encryption\Crypt\Exception\Exception;
 use Sparrow\Encryption\Crypt\Exception\Mismatch;
-use Sparrow\Encryption\Crypt\PadFactory;
 
 /**
  * Provides encryption capabilities to Phalcon applications.
@@ -127,15 +126,8 @@ class Crypt implements CryptInterface
      */
     public function __construct(
         string cipher = self::DEFAULT_CIPHER,
-        bool useSigning = true,
-        <PadFactory> padFactory = null
+        bool useSigning = true
     ) {
-        if null === padFactory {
-            let padFactory = new PadFactory();
-        }
-
-        let this->padFactory    = padFactory,
-            this->hashAlgorithm = self::DEFAULT_ALGORITHM;
 
         this
             ->initializeAvailableCiphers()

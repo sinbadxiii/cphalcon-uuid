@@ -40,7 +40,6 @@ zend_class_entry *sparrow_encryption_crypt_padding_noop_ce;
 zend_class_entry *sparrow_encryption_crypt_padding_pkcs7_ce;
 zend_class_entry *sparrow_encryption_crypt_padding_space_ce;
 zend_class_entry *sparrow_encryption_crypt_padding_zero_ce;
-zend_class_entry *sparrow_encryption_crypt_padfactory_ce;
 zend_class_entry *sparrow_encryption_security_ce;
 zend_class_entry *sparrow_encryption_security_exception_ce;
 zend_class_entry *sparrow_encryption_security_random_ce;
@@ -71,7 +70,6 @@ static PHP_MINIT_FUNCTION(phalcon_uuid)
 	ZEPHIR_INIT(Sparrow_Encryption_Crypt_Exception_Exception);
 	ZEPHIR_INIT(Sparrow_Encryption_Crypt);
 	ZEPHIR_INIT(Sparrow_Encryption_Crypt_Exception_Mismatch);
-	ZEPHIR_INIT(Sparrow_Encryption_Crypt_PadFactory);
 	ZEPHIR_INIT(Sparrow_Encryption_Crypt_Padding_Ansi);
 	ZEPHIR_INIT(Sparrow_Encryption_Crypt_Padding_Iso10126);
 	ZEPHIR_INIT(Sparrow_Encryption_Crypt_Padding_IsoIek);

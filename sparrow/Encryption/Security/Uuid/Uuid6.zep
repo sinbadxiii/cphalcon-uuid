@@ -26,7 +26,7 @@ class Uuid6 extends Uuid implements TimeBasedUidInterface
                 var seed;
 
                 let seed = (new RandomNodeProvider())->getSeed();
-                let node = unpack("N2", hex2bin("00".substr(uuid1, 24, 6)).hex2bin("00".substr(uuid1, 30)));
+                let node = unpack("N2", hex2bin("00" . substr(uuid1, 24, 6)) . hex2bin("00" . substr(uuid1, 30)));
                 let self::node = sprintf("%06x%06x", (seed[0] ^ node[1]) | 0x010000, seed[1] ^ node[2]);
             }
 
@@ -36,8 +36,7 @@ class Uuid6 extends Uuid implements TimeBasedUidInterface
 
     public function getDateTime() -> <DateTimeImmutable>
     {
-        return this->hexToDateTime(
-            "0" . substr(this->uid, 0, 8) .
+        return this->hexToDateTime("0" . substr(this->uid, 0, 8) .
             substr(this->uid, 9, 4) . substr(this->uid, 15, 3)
         );
     }

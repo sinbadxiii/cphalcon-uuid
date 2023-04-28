@@ -45,7 +45,6 @@ zend_object *zephir_init_properties_Sparrow_Encryption_Crypt(zend_class_entry *c
 ZEND_BEGIN_ARG_INFO_EX(arginfo_sparrow_encryption_crypt___construct, 0, 0, 0)
 	ZEND_ARG_TYPE_INFO(0, cipher, IS_STRING, 0)
 	ZEND_ARG_TYPE_INFO(0, useSigning, _IS_BOOL, 0)
-	ZEND_ARG_OBJ_INFO(0, padFactory, Sparrow\\Encryption\\Crypt\\PadFactory, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_sparrow_encryption_crypt_decrypt, 0, 1, IS_STRING, 0)

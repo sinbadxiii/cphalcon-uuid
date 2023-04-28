@@ -100,7 +100,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_Uuid1, __construct)
 		if ((zephir_function_exists_ex(ZEND_STRL("apcu_fetch")) == SUCCESS)) {
 			ZEPHIR_INIT_VAR(&_2$$5);
 			ZVAL_STRING(&_2$$5, "__phalcon_uuid_node");
-			ZEPHIR_CALL_FUNCTION(node, "apcu_fetch", NULL, 68, &_2$$5);
+			ZEPHIR_CALL_FUNCTION(node, "apcu_fetch", NULL, 67, &_2$$5);
 			zephir_check_call_status();
 			if (ZEPHIR_IS_FALSE_IDENTICAL(node)) {
 				ZEPHIR_CALL_METHOD(&_3$$6, this_ptr, "getnodeprovider", NULL, 0);
@@ -109,7 +109,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_Uuid1, __construct)
 				zephir_check_call_status();
 				ZEPHIR_INIT_VAR(&_4$$6);
 				ZVAL_STRING(&_4$$6, "__phalcon_uuid_node");
-				ZEPHIR_CALL_FUNCTION(NULL, "apcu_store", NULL, 69, &_4$$6, node);
+				ZEPHIR_CALL_FUNCTION(NULL, "apcu_store", NULL, 68, &_4$$6, node);
 				zephir_check_call_status();
 			}
 		} else {

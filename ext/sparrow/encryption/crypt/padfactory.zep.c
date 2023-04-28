@@ -132,15 +132,16 @@ PHP_METHOD(Sparrow_Encryption_Crypt_PadFactory, newInstance)
  */
 PHP_METHOD(Sparrow_Encryption_Crypt_PadFactory, padNumberToService)
 {
+	zend_class_entry *_1 = NULL;
 	zval map;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zval *number_param = NULL, _0, _1, _2;
+	zval *number_param = NULL, _0, _2, _3;
 	zend_long number, ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&map);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
@@ -164,16 +165,19 @@ PHP_METHOD(Sparrow_Encryption_Crypt_PadFactory, padNumberToService)
 	add_index_stringl(&map, 6, SL("space"));
 	add_index_stringl(&map, 5, SL("zero"));
 	ZEPHIR_INIT_VAR(&_0);
-	object_init_ex(&_0, zephir_get_internal_ce(SL("phalcon\\support\\helper\\arr\\get")));
+	if (!_1) {
+	_1 = zephir_fetch_class_str_ex(SL("Phalcon\\Support\\Helper\\Arr\\Get"), ZEND_FETCH_CLASS_AUTO);
+	}
+	object_init_ex(&_0, _1);
 	if (zephir_has_constructor(&_0)) {
 		ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 0);
 		zephir_check_call_status();
 	}
 
-	ZVAL_LONG(&_1, number);
-	ZEPHIR_INIT_VAR(&_2);
-	ZVAL_STRING(&_2, "noop");
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "__invoke", NULL, 0, &map, &_1, &_2);
+	ZVAL_LONG(&_2, number);
+	ZEPHIR_INIT_VAR(&_3);
+	ZVAL_STRING(&_3, "noop");
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "__invoke", NULL, 0, &map, &_2, &_3);
 	zephir_check_call_status();
 	RETURN_MM();
 }

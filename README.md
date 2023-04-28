@@ -2,6 +2,10 @@
 
 The library allows you to generate uuid 1-6 versions (for now).
 
+## Versions 
+
+PHP 8.x
+
 ## Install
 
 ```

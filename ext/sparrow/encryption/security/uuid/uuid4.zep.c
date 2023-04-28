@@ -62,7 +62,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_Uuid4, __construct)
 		ZVAL_LONG(&_1$$3, 16);
 		ZEPHIR_CALL_METHOD(&_0$$3, this_ptr, "bytes", NULL, 0, &_1$$3);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&hash$$3, "bin2hex", NULL, 71, &_0$$3);
+		ZEPHIR_CALL_FUNCTION(&hash$$3, "bin2hex", NULL, 70, &_0$$3);
 		zephir_check_call_status();
 		ZVAL_LONG(&_1$$3, 4);
 		ZEPHIR_CALL_METHOD(&_2$$3, this_ptr, "format", NULL, 0, &hash$$3, &_1$$3);

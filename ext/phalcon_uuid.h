@@ -13,7 +13,6 @@
 #include "sparrow/encryption/crypt/exception/exception.zep.h"
 #include "sparrow/encryption/crypt.zep.h"
 #include "sparrow/encryption/crypt/exception/mismatch.zep.h"
-#include "sparrow/encryption/crypt/padfactory.zep.h"
 #include "sparrow/encryption/crypt/padding/ansi.zep.h"
 #include "sparrow/encryption/crypt/padding/iso10126.zep.h"
 #include "sparrow/encryption/crypt/padding/isoiek.zep.h"

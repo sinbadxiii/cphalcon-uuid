@@ -12,9 +12,9 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/operators.h"
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
+#include "kernel/operators.h"
 #include "kernel/object.h"
 #include "kernel/exception.h"
 #include "kernel/string.h"
@@ -148,30 +148,26 @@ PHP_METHOD(Sparrow_Encryption_Crypt, __construct)
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zend_bool useSigning;
-	zval *cipher_param = NULL, *useSigning_param = NULL, *padFactory = NULL, padFactory_sub, __$null, _0, _1, _2, _3;
+	zval *cipher_param = NULL, *useSigning_param = NULL, _0, _1, _2;
 	zval cipher;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&cipher);
-	ZVAL_UNDEF(&padFactory_sub);
-	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
-	ZEND_PARSE_PARAMETERS_START(0, 3)
+	ZEND_PARSE_PARAMETERS_START(0, 2)
 		Z_PARAM_OPTIONAL
 		Z_PARAM_STR(cipher)
 		Z_PARAM_BOOL(useSigning)
-		Z_PARAM_OBJECT_OF_CLASS_OR_NULL(padFactory, zephir_get_internal_ce(SL("sparrow\\encryption\\crypt\\padfactory")))
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 3, &cipher_param, &useSigning_param, &padFactory);
+	zephir_fetch_params(1, 0, 2, &cipher_param, &useSigning_param);
 	if (!cipher_param) {
 		ZEPHIR_INIT_VAR(&cipher);
 		ZVAL_STRING(&cipher, "aes-256-cfb");
@@ -183,35 +179,18 @@ PHP_METHOD(Sparrow_Encryption_Crypt, __construct)
 	} else {
 		useSigning = zephir_get_boolval(useSigning_param);
 	}
-	if (!padFactory) {
-		padFactory = &padFactory_sub;
-		ZEPHIR_CPY_WRT(padFactory, &__$null);
-	} else {
-		ZEPHIR_SEPARATE_PARAM(padFactory);
-	}
 
 
-	if (Z_TYPE_P(padFactory) == IS_NULL) {
-		ZEPHIR_INIT_NVAR(padFactory);
-		object_init_ex(padFactory, sparrow_encryption_crypt_padfactory_ce);
-		ZEPHIR_CALL_METHOD(NULL, padFactory, "__construct", NULL, 22);
-		zephir_check_call_status();
-	}
-	zephir_update_property_zval(this_ptr, ZEND_STRL("padFactory"), padFactory);
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "sha256");
-	zephir_update_property_zval(this_ptr, ZEND_STRL("hashAlgorithm"), &_0);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "initializeavailableciphers", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "initializeavailableciphers", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_2, &_1, "setcipher", NULL, 0, &cipher);
+	ZEPHIR_CALL_METHOD(&_1, &_0, "setcipher", NULL, 0, &cipher);
 	zephir_check_call_status();
 	if (useSigning) {
-		ZVAL_BOOL(&_3, 1);
+		ZVAL_BOOL(&_2, 1);
 	} else {
-		ZVAL_BOOL(&_3, 0);
+		ZVAL_BOOL(&_2, 0);
 	}
-	ZEPHIR_CALL_METHOD(NULL, &_2, "usesigning", NULL, 0, &_3);
+	ZEPHIR_CALL_METHOD(NULL, &_1, "usesigning", NULL, 0, &_2);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 }
@@ -292,7 +271,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, decrypt)
 		ZEPHIR_CPY_WRT(&decryptKey, &key);
 	}
 	if (1 == ZEPHIR_IS_EMPTY(&decryptKey)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Decryption key cannot be empty", "sparrow/Encryption/Crypt.zep", 175);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Decryption key cannot be empty", "sparrow/Encryption/Crypt.zep", 167);
 		return;
 	}
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("cipher"), PH_NOISY_CC | PH_READONLY);
@@ -303,14 +282,14 @@ PHP_METHOD(Sparrow_Encryption_Crypt, decrypt)
 	ZVAL_STRING(&_1, "cipher");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcipherhashisavailable", NULL, 0, &cipher, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&mode, this_ptr, "getmode", NULL, 23);
+	ZEPHIR_CALL_METHOD(&mode, this_ptr, "getmode", NULL, 22);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&blockSize, this_ptr, "getblocksize", NULL, 24, &mode);
+	ZEPHIR_CALL_METHOD(&blockSize, this_ptr, "getblocksize", NULL, 23, &mode);
 	zephir_check_call_status();
 	ZVAL_LONG(&_0, 0);
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "8bit");
-	ZEPHIR_CALL_FUNCTION(&iv, "mb_substr", NULL, 25, &input, &_0, &ivLength, &_1);
+	ZEPHIR_CALL_FUNCTION(&iv, "mb_substr", NULL, 24, &input, &_0, &ivLength, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&digest);
 	ZVAL_STRING(&digest, "");
@@ -320,24 +299,24 @@ PHP_METHOD(Sparrow_Encryption_Crypt, decrypt)
 	if (ZEPHIR_IS_TRUE_IDENTICAL(&_0)) {
 		ZEPHIR_INIT_VAR(&_2$$5);
 		ZVAL_STRING(&_2$$5, "");
-		ZEPHIR_CALL_FUNCTION(&_3$$5, "hash", NULL, 26, &hashAlgorithm, &_2$$5, &__$true);
+		ZEPHIR_CALL_FUNCTION(&_3$$5, "hash", NULL, 25, &hashAlgorithm, &_2$$5, &__$true);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&hashLength);
 		ZVAL_LONG(&hashLength, zephir_fast_strlen_ev(&_3$$5));
 		ZEPHIR_INIT_NVAR(&_2$$5);
 		ZVAL_STRING(&_2$$5, "8bit");
-		ZEPHIR_CALL_FUNCTION(&digest, "mb_substr", NULL, 25, &input, &ivLength, &hashLength, &_2$$5);
+		ZEPHIR_CALL_FUNCTION(&digest, "mb_substr", NULL, 24, &input, &ivLength, &hashLength, &_2$$5);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_4$$5);
 		zephir_add_function(&_4$$5, &ivLength, &hashLength);
 		ZEPHIR_INIT_NVAR(&_2$$5);
 		ZVAL_STRING(&_2$$5, "8bit");
-		ZEPHIR_CALL_FUNCTION(&cipherText, "mb_substr", NULL, 25, &input, &_4$$5, &__$null, &_2$$5);
+		ZEPHIR_CALL_FUNCTION(&cipherText, "mb_substr", NULL, 24, &input, &_4$$5, &__$null, &_2$$5);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_INIT_VAR(&_5$$6);
 		ZVAL_STRING(&_5$$6, "8bit");
-		ZEPHIR_CALL_FUNCTION(&cipherText, "mb_substr", NULL, 25, &input, &ivLength, &__$null, &_5$$6);
+		ZEPHIR_CALL_FUNCTION(&cipherText, "mb_substr", NULL, 24, &input, &ivLength, &__$null, &_5$$6);
 		zephir_check_call_status();
 	}
 	ZEPHIR_CALL_METHOD(&decrypted, this_ptr, "decryptgcmccmauth", NULL, 0, &mode, &cipherText, &decryptKey, &iv);
@@ -348,10 +327,10 @@ PHP_METHOD(Sparrow_Encryption_Crypt, decrypt)
 	ZEPHIR_CPY_WRT(&decrypted, &_6);
 	zephir_read_property(&_7, this_ptr, ZEND_STRL("useSigning"), PH_NOISY_CC | PH_READONLY);
 	if (ZEPHIR_IS_TRUE_IDENTICAL(&_7)) {
-		ZEPHIR_CALL_FUNCTION(&_8$$7, "hash_hmac", NULL, 27, &hashAlgorithm, &padded, &decryptKey, &__$true);
+		ZEPHIR_CALL_FUNCTION(&_8$$7, "hash_hmac", NULL, 26, &hashAlgorithm, &padded, &decryptKey, &__$true);
 		zephir_check_call_status();
 		if (!ZEPHIR_IS_IDENTICAL(&digest, &_8$$7)) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_mismatch_ce, "Hash does not match.", "sparrow/Encryption/Crypt.zep", 224);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_mismatch_ce, "Hash does not match.", "sparrow/Encryption/Crypt.zep", 216);
 			return;
 		}
 	}
@@ -428,7 +407,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, decryptBase64)
 		ZEPHIR_CONCAT_VV(&_4$$3, &_2$$3, &_1$$3);
 		zephir_get_strval(&input, &_4$$3);
 	}
-	ZEPHIR_CALL_FUNCTION(&_5, "base64_decode", NULL, 28, &input);
+	ZEPHIR_CALL_FUNCTION(&_5, "base64_decode", NULL, 27, &input);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "decrypt", NULL, 0, &_5, &key);
 	zephir_check_call_status();
@@ -500,7 +479,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, encrypt)
 		ZEPHIR_CPY_WRT(&encryptKey, &key);
 	}
 	if (1 == ZEPHIR_IS_EMPTY(&encryptKey)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Encryption key cannot be empty", "sparrow/Encryption/Crypt.zep", 282);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Encryption key cannot be empty", "sparrow/Encryption/Crypt.zep", 274);
 		return;
 	}
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("cipher"), PH_NOISY_CC | PH_READONLY);
@@ -511,14 +490,14 @@ PHP_METHOD(Sparrow_Encryption_Crypt, encrypt)
 	ZVAL_STRING(&_1, "cipher");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcipherhashisavailable", NULL, 0, &cipher, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&mode, this_ptr, "getmode", NULL, 23);
+	ZEPHIR_CALL_METHOD(&mode, this_ptr, "getmode", NULL, 22);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&blockSize, this_ptr, "getblocksize", NULL, 24, &mode);
+	ZEPHIR_CALL_METHOD(&blockSize, this_ptr, "getblocksize", NULL, 23, &mode);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&iv, this_ptr, "phpopensslrandompseudobytes", NULL, 0, &ivLength);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_FALSE_IDENTICAL(&iv)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Cannot calculate Random Pseudo Bytes", "sparrow/Encryption/Crypt.zep", 295);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Cannot calculate Random Pseudo Bytes", "sparrow/Encryption/Crypt.zep", 287);
 		return;
 	}
 	ZEPHIR_CALL_METHOD(&padded, this_ptr, "encryptgetpadded", NULL, 0, &mode, &input, &blockSize);
@@ -529,7 +508,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, encrypt)
 	if (ZEPHIR_IS_TRUE_IDENTICAL(&_0)) {
 		ZEPHIR_CALL_METHOD(&_2$$6, this_ptr, "gethashalgorithm", NULL, 0);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&digest, "hash_hmac", NULL, 27, &_2$$6, &padded, &encryptKey, &__$true);
+		ZEPHIR_CALL_FUNCTION(&digest, "hash_hmac", NULL, 26, &_2$$6, &padded, &encryptKey, &__$true);
 		zephir_check_call_status();
 		ZEPHIR_CONCAT_VVV(return_value, &iv, &digest, &encrypted);
 		RETURN_MM();
@@ -693,11 +672,11 @@ PHP_METHOD(Sparrow_Encryption_Crypt, getAvailableHashAlgorithms)
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "phpfunctionexists", NULL, 0, &_1);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE_IDENTICAL(&_0)) {
-		ZEPHIR_RETURN_CALL_FUNCTION("hash_hmac_algos", NULL, 29);
+		ZEPHIR_RETURN_CALL_FUNCTION("hash_hmac_algos", NULL, 28);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
-	ZEPHIR_RETURN_CALL_FUNCTION("hash_algos", NULL, 30);
+	ZEPHIR_RETURN_CALL_FUNCTION("hash_algos", NULL, 29);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -783,7 +762,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, isValidDecryptLength)
 	if (ZEPHIR_IS_FALSE_IDENTICAL(&length)) {
 		RETURN_MM_BOOL(0);
 	}
-	ZEPHIR_CALL_FUNCTION(&_1, "mb_strlen", NULL, 31, &input);
+	ZEPHIR_CALL_FUNCTION(&_1, "mb_strlen", NULL, 30, &input);
 	zephir_check_call_status();
 	RETURN_MM_BOOL(ZEPHIR_LE(&length, &_1));
 }
@@ -914,7 +893,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, setCipher)
 	ZVAL_STRING(&_0, "cipher");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcipherhashisavailable", NULL, 0, &cipher, &_0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getivlength", NULL, 32, &cipher);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getivlength", NULL, 31, &cipher);
 	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, ZEND_STRL("ivLength"), &_1);
 	zephir_update_property_zval(this_ptr, ZEND_STRL("cipher"), &cipher);
@@ -1121,7 +1100,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, checkCipherHashIsAvailable)
 	}
 	ZEPHIR_CALL_METHOD_ZVAL(&available, this_ptr, &method, NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&lower, "mb_strtolower", NULL, 33, &cipher);
+	ZEPHIR_CALL_FUNCTION(&lower, "mb_strtolower", NULL, 32, &cipher);
 	zephir_check_call_status();
 	if (1 != zephir_array_isset(&available, &lower)) {
 		ZEPHIR_INIT_VAR(&_1$$5);
@@ -1130,9 +1109,9 @@ PHP_METHOD(Sparrow_Encryption_Crypt, checkCipherHashIsAvailable)
 		ZVAL_STRING(&_2$$5, "The %s algorithm '%s' is not supported on this system.");
 		ZEPHIR_CALL_FUNCTION(&_3$$5, "sprintf", NULL, 9, &_2$$5, &type, &cipher);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_1$$5, "__construct", NULL, 34, &_3$$5);
+		ZEPHIR_CALL_METHOD(NULL, &_1$$5, "__construct", NULL, 33, &_3$$5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$5, "sparrow/Encryption/Crypt.zep", 608);
+		zephir_throw_exception_debug(&_1$$5, "sparrow/Encryption/Crypt.zep", 600);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -1205,10 +1184,10 @@ PHP_METHOD(Sparrow_Encryption_Crypt, cryptPadText)
 	ZEPHIR_INIT_NVAR(&_2);
 	ZVAL_STRING(&_2, "ecb");
 	zephir_array_fast_append(&_1, &_2);
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "checkismode", NULL, 35, &_1, &mode);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "checkismode", NULL, 34, &_1, &mode);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE_IDENTICAL(&_0)) {
-		ZEPHIR_CALL_FUNCTION(&_3$$3, "mb_strlen", NULL, 31, &input);
+		ZEPHIR_CALL_FUNCTION(&_3$$3, "mb_strlen", NULL, 30, &input);
 		zephir_check_call_status();
 		paddingSize = (blockSize - zephir_safe_mod_zval_long(&_3$$3, blockSize));
 		_4$$3 = paddingSize >= 256;
@@ -1216,7 +1195,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, cryptPadText)
 			_4$$3 = paddingSize < 0;
 		}
 		if (_4$$3) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Padding size cannot be less than 0 or greater than 256", "sparrow/Encryption/Crypt.zep", 641);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Padding size cannot be less than 0 or greater than 256", "sparrow/Encryption/Crypt.zep", 633);
 			return;
 		}
 		zephir_read_property(&_5$$3, this_ptr, ZEND_STRL("padFactory"), PH_NOISY_CC | PH_READONLY);
@@ -1316,7 +1295,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, cryptUnpadText)
 		ZEPHIR_INIT_NVAR(&_4);
 		ZVAL_STRING(&_4, "ecb");
 		zephir_array_fast_append(&_3, &_4);
-		ZEPHIR_CALL_METHOD(&_2, this_ptr, "checkismode", NULL, 35, &_3, &mode);
+		ZEPHIR_CALL_METHOD(&_2, this_ptr, "checkismode", NULL, 34, &_3, &mode);
 		zephir_check_call_status();
 		_1 = ZEPHIR_IS_TRUE_IDENTICAL(&_2);
 	}
@@ -1401,7 +1380,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, decryptGetUnpadded)
 	ZEPHIR_INIT_NVAR(&_2);
 	ZVAL_STRING(&_2, "ecb");
 	zephir_array_fast_append(&_1, &_2);
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "checkismode", NULL, 35, &_1, &mode);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "checkismode", NULL, 34, &_1, &mode);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE_IDENTICAL(&_0)) {
 		zephir_read_property(&_3$$3, this_ptr, ZEND_STRL("padding"), PH_NOISY_CC | PH_READONLY);
@@ -1478,7 +1457,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, decryptGcmCcmAuth)
 	ZEPHIR_INIT_NVAR(&_3);
 	ZVAL_STRING(&_3, "gcm");
 	zephir_array_fast_append(&_2, &_3);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "checkismode", NULL, 35, &_2, &mode);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "checkismode", NULL, 34, &_2, &mode);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE_IDENTICAL(&_1)) {
 		zephir_read_property(&_4$$3, this_ptr, ZEND_STRL("authData"), PH_NOISY_CC | PH_READONLY);
@@ -1493,15 +1472,15 @@ PHP_METHOD(Sparrow_Encryption_Crypt, decryptGcmCcmAuth)
 		ZEPHIR_INIT_VAR(&encrypted);
 		zephir_fast_str_replace(&encrypted, &authTag, &_5$$3, &cipherText);
 		ZVAL_LONG(&_4$$3, 1);
-		ZEPHIR_CALL_FUNCTION(&decrypted, "openssl_decrypt", NULL, 36, &encrypted, &cipher, &decryptKey, &_4$$3, &iv, &authTag, &authData);
+		ZEPHIR_CALL_FUNCTION(&decrypted, "openssl_decrypt", NULL, 35, &encrypted, &cipher, &decryptKey, &_4$$3, &iv, &authTag, &authData);
 		zephir_check_call_status();
 	} else {
 		ZVAL_LONG(&_6$$4, 1);
-		ZEPHIR_CALL_FUNCTION(&decrypted, "openssl_decrypt", NULL, 36, &cipherText, &cipher, &decryptKey, &_6$$4, &iv);
+		ZEPHIR_CALL_FUNCTION(&decrypted, "openssl_decrypt", NULL, 35, &cipherText, &cipher, &decryptKey, &_6$$4, &iv);
 		zephir_check_call_status();
 	}
 	if (ZEPHIR_IS_FALSE_IDENTICAL(&decrypted)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Could not decrypt data", "sparrow/Encryption/Crypt.zep", 782);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Could not decrypt data", "sparrow/Encryption/Crypt.zep", 774);
 		return;
 	}
 	RETURN_CCTOR(&decrypted);
@@ -1561,7 +1540,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, encryptGetPadded)
 		ZEPHIR_INIT_NVAR(&_4);
 		ZVAL_STRING(&_4, "ecb");
 		zephir_array_fast_append(&_3, &_4);
-		ZEPHIR_CALL_METHOD(&_2, this_ptr, "checkismode", NULL, 35, &_3, &mode);
+		ZEPHIR_CALL_METHOD(&_2, this_ptr, "checkismode", NULL, 34, &_3, &mode);
 		zephir_check_call_status();
 		_1 = ZEPHIR_IS_TRUE_IDENTICAL(&_2);
 	}
@@ -1639,13 +1618,13 @@ PHP_METHOD(Sparrow_Encryption_Crypt, encryptGcmCcm)
 	ZEPHIR_INIT_NVAR(&_3);
 	ZVAL_STRING(&_3, "gcm");
 	zephir_array_fast_append(&_2, &_3);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "checkismode", NULL, 35, &_2, &mode);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "checkismode", NULL, 34, &_2, &mode);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_TRUE_IDENTICAL(&_1)) {
 		zephir_read_property(&_4$$3, this_ptr, ZEND_STRL("authData"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_CPY_WRT(&authData, &_4$$3);
 		if (1 == ZEPHIR_IS_EMPTY(&authData)) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Auth data must be provided when using AEAD mode", "sparrow/Encryption/Crypt.zep", 841);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Auth data must be provided when using AEAD mode", "sparrow/Encryption/Crypt.zep", 833);
 			return;
 		}
 		zephir_read_property(&_4$$3, this_ptr, ZEND_STRL("authTag"), PH_NOISY_CC | PH_READONLY);
@@ -1654,17 +1633,17 @@ PHP_METHOD(Sparrow_Encryption_Crypt, encryptGcmCcm)
 		ZEPHIR_CPY_WRT(&authTagLength, &_4$$3);
 		ZVAL_LONG(&_4$$3, 1);
 		ZEPHIR_MAKE_REF(&authTag);
-		ZEPHIR_CALL_FUNCTION(&encrypted, "openssl_encrypt", NULL, 37, &padded, &cipher, &encryptKey, &_4$$3, &iv, &authTag, &authData, &authTagLength);
+		ZEPHIR_CALL_FUNCTION(&encrypted, "openssl_encrypt", NULL, 36, &padded, &cipher, &encryptKey, &_4$$3, &iv, &authTag, &authData, &authTagLength);
 		ZEPHIR_UNREF(&authTag);
 		zephir_check_call_status();
 		zephir_update_property_zval(this_ptr, ZEND_STRL("authTag"), &authTag);
 	} else {
 		ZVAL_LONG(&_5$$5, 1);
-		ZEPHIR_CALL_FUNCTION(&encrypted, "openssl_encrypt", NULL, 37, &padded, &cipher, &encryptKey, &_5$$5, &iv);
+		ZEPHIR_CALL_FUNCTION(&encrypted, "openssl_encrypt", NULL, 36, &padded, &cipher, &encryptKey, &_5$$5, &iv);
 		zephir_check_call_status();
 	}
 	if (ZEPHIR_IS_FALSE_IDENTICAL(&encrypted)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Could not encrypt data", "sparrow/Encryption/Crypt.zep", 870);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Could not encrypt data", "sparrow/Encryption/Crypt.zep", 862);
 		return;
 	}
 	ZEPHIR_CONCAT_VV(return_value, &encrypted, &authTag);
@@ -1702,14 +1681,14 @@ PHP_METHOD(Sparrow_Encryption_Crypt, initializeAvailableCiphers)
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "phpfunctionexists", NULL, 0, &_1);
 	zephir_check_call_status();
 	if (!ZEPHIR_IS_TRUE_IDENTICAL(&_0)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "This class requires the openssl extension for PHP", "sparrow/Encryption/Crypt.zep", 892);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "This class requires the openssl extension for PHP", "sparrow/Encryption/Crypt.zep", 884);
 		return;
 	}
-	ZEPHIR_CALL_FUNCTION(&available, "openssl_get_cipher_methods", NULL, 38, &__$true);
+	ZEPHIR_CALL_FUNCTION(&available, "openssl_get_cipher_methods", NULL, 37, &__$true);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&allowed);
 	array_init(&allowed);
-	zephir_is_iterable(&available, 0, "sparrow/Encryption/Crypt.zep", 909);
+	zephir_is_iterable(&available, 0, "sparrow/Encryption/Crypt.zep", 901);
 	if (Z_TYPE_P(&available) == IS_ARRAY) {
 		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&available), _2)
 		{
@@ -1846,9 +1825,9 @@ PHP_METHOD(Sparrow_Encryption_Crypt, getBlockSize)
 	zephir_read_property(&_2, this_ptr, ZEND_STRL("cipher"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_3);
 	ZVAL_STRING(&_3, "");
-	ZEPHIR_CALL_FUNCTION(&_4, "str_ireplace", NULL, 39, &_1, &_3, &_2);
+	ZEPHIR_CALL_FUNCTION(&_4, "str_ireplace", NULL, 38, &_1, &_3, &_2);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "getivlength", NULL, 32, &_4);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "getivlength", NULL, 31, &_4);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -1884,10 +1863,10 @@ PHP_METHOD(Sparrow_Encryption_Crypt, getIvLength)
 	zephir_get_strval(&cipher, cipher_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&length, "openssl_cipher_iv_length", NULL, 40, &cipher);
+	ZEPHIR_CALL_FUNCTION(&length, "openssl_cipher_iv_length", NULL, 39, &cipher);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_FALSE_IDENTICAL(&length)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Cannot calculate the initialization vector (IV) length of the cipher", "sparrow/Encryption/Crypt.zep", 962);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(sparrow_encryption_crypt_exception_exception_ce, "Cannot calculate the initialization vector (IV) length of the cipher", "sparrow/Encryption/Crypt.zep", 954);
 		return;
 	}
 	RETURN_CCTOR(&length);
@@ -1919,7 +1898,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, getMode)
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("cipher"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "-");
-	ZEPHIR_CALL_FUNCTION(&_2, "strrpos", NULL, 41, &_0, &_1);
+	ZEPHIR_CALL_FUNCTION(&_2, "strrpos", NULL, 40, &_0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&position);
 	ZVAL_LONG(&position, zephir_get_intval(&_2));
@@ -1928,7 +1907,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, getMode)
 	ZVAL_LONG(&_5, ((zephir_get_numberval(&position) - zephir_fast_strlen_ev(&_4)) + 1));
 	ZEPHIR_INIT_NVAR(&_1);
 	zephir_substr(&_1, &_3, zephir_get_intval(&_5), 0, ZEPHIR_SUBSTR_NO_LENGTH);
-	ZEPHIR_RETURN_CALL_FUNCTION("mb_strtolower", NULL, 33, &_1);
+	ZEPHIR_RETURN_CALL_FUNCTION("mb_strtolower", NULL, 32, &_1);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -1982,7 +1961,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, phpOpensslCipherIvLength)
 	zephir_get_strval(&cipher, cipher_param);
 
 
-	ZEPHIR_RETURN_CALL_FUNCTION("openssl_cipher_iv_length", NULL, 40, &cipher);
+	ZEPHIR_RETURN_CALL_FUNCTION("openssl_cipher_iv_length", NULL, 39, &cipher);
 	zephir_check_call_status();
 	RETURN_MM();
 }
@@ -2009,7 +1988,7 @@ PHP_METHOD(Sparrow_Encryption_Crypt, phpOpensslRandomPseudoBytes)
 
 
 	ZVAL_LONG(&_0, length);
-	ZEPHIR_RETURN_CALL_FUNCTION("openssl_random_pseudo_bytes", NULL, 42, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("openssl_random_pseudo_bytes", NULL, 41, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 }

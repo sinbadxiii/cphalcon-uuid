@@ -163,7 +163,7 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_Uuid6, __construct)
 				zephir_check_call_status();
 			}
 
-			ZEPHIR_CALL_METHOD(&seed$$5, &_24$$5, "getseed", NULL, 73);
+			ZEPHIR_CALL_METHOD(&seed$$5, &_24$$5, "getseed", NULL, 72);
 			zephir_check_call_status();
 			ZVAL_LONG(&_25$$5, 24);
 			ZVAL_LONG(&_26$$5, 6);
@@ -171,14 +171,14 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_Uuid6, __construct)
 			zephir_substr(&_27$$5, &uuid1, 24 , 6 , 0);
 			ZEPHIR_INIT_VAR(&_28$$5);
 			ZEPHIR_CONCAT_SV(&_28$$5, "00", &_27$$5);
-			ZEPHIR_CALL_FUNCTION(&_29$$5, "hex2bin", NULL, 70, &_28$$5);
+			ZEPHIR_CALL_FUNCTION(&_29$$5, "hex2bin", NULL, 69, &_28$$5);
 			zephir_check_call_status();
 			ZVAL_LONG(&_30$$5, 30);
 			ZEPHIR_INIT_VAR(&_31$$5);
 			zephir_substr(&_31$$5, &uuid1, 30 , 0, ZEPHIR_SUBSTR_NO_LENGTH);
 			ZEPHIR_INIT_VAR(&_32$$5);
 			ZEPHIR_CONCAT_SV(&_32$$5, "00", &_31$$5);
-			ZEPHIR_CALL_FUNCTION(&_33$$5, "hex2bin", NULL, 70, &_32$$5);
+			ZEPHIR_CALL_FUNCTION(&_33$$5, "hex2bin", NULL, 69, &_32$$5);
 			zephir_check_call_status();
 			ZEPHIR_INIT_VAR(&_34$$5);
 			ZEPHIR_CONCAT_VV(&_34$$5, &_29$$5, &_33$$5);
@@ -186,12 +186,12 @@ PHP_METHOD(Sparrow_Encryption_Security_Uuid_Uuid6, __construct)
 			ZVAL_STRING(&_35$$5, "N2");
 			ZEPHIR_CALL_FUNCTION(node, "unpack", NULL, 5, &_35$$5, &_34$$5);
 			zephir_check_call_status();
-			zephir_array_fetch_long(&_36$$5, &seed$$5, 0, PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid/Uuid6.zep", 32);
-			zephir_array_fetch_long(&_37$$5, node, 1, PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid/Uuid6.zep", 32);
+			zephir_array_fetch_long(&_36$$5, &seed$$5, 0, PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid/Uuid6.zep", 30);
+			zephir_array_fetch_long(&_37$$5, node, 1, PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid/Uuid6.zep", 30);
 			ZEPHIR_INIT_VAR(&_38$$5);
 			zephir_bitwise_xor_function(&_38$$5, &_36$$5, &_37$$5);
-			zephir_array_fetch_long(&_36$$5, &seed$$5, 1, PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid/Uuid6.zep", 32);
-			zephir_array_fetch_long(&_37$$5, node, 2, PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid/Uuid6.zep", 32);
+			zephir_array_fetch_long(&_36$$5, &seed$$5, 1, PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid/Uuid6.zep", 30);
+			zephir_array_fetch_long(&_37$$5, node, 2, PH_NOISY | PH_READONLY, "sparrow/Encryption/Security/Uuid/Uuid6.zep", 30);
 			ZEPHIR_INIT_VAR(&_39$$5);
 			zephir_bitwise_xor_function(&_39$$5, &_36$$5, &_37$$5);
 			ZEPHIR_INIT_NVAR(&_35$$5);
